@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Rhythm
 {
-    public partial class Form1 : Form
+    public partial class Rhythm : Form
     {
-        public Form1()
+        public Rhythm()
         {
             InitializeComponent();
         }
