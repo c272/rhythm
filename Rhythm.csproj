@@ -55,17 +55,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Lexers\algoLexer.cs" />
-    <Compile Include="Rhythm.cs">
+    <Compile Include="Data Structures\EditorTabInfo.cs" />
+    <Compile Include="Forms\Error.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Rhythm.Designer.cs">
+    <Compile Include="Forms\Error.designer.cs">
+      <DependentUpon>Error.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lexing\algoLexer.cs" />
+    <Compile Include="Forms\Rhythm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Rhythm.Designer.cs">
       <DependentUpon>Rhythm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RhythmSyntaxHighlighter.cs" />
-    <Compile Include="ScintillaUtils.cs" />
+    <Compile Include="Lexing\RhythmSyntaxHighlighter.cs" />
+    <Compile Include="Utility\ScintillaUtils.cs" />
+    <EmbeddedResource Include="Forms\Error.resx">
+      <DependentUpon>Error.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -75,7 +85,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Rhythm.resx">
+    <EmbeddedResource Include="Forms\Rhythm.resx">
       <DependentUpon>Rhythm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />

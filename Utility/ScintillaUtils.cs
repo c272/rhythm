@@ -180,6 +180,9 @@ namespace Rhythm
         //Sets the style values for a given text area to comply with Algo specification.
         private static void SetAlgoStyles(Scintilla TextArea)
         {
+            //Normal (non-styled)
+            TextArea.Styles[0].ForeColor = Color.White;
+
             //Keywords (let, for, while, etc).
             TextArea.Styles[1].ForeColor = Color.Blue;
 
