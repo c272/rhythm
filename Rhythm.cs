@@ -17,6 +17,10 @@ namespace Rhythm
         public Rhythm()
         {
             InitializeComponent();
+
+            //Enable hotkeys.
+            //..
+             
         }
 
         //Execute things on load.
@@ -31,6 +35,9 @@ namespace Rhythm
         {
             //Create the tab.
             editorTabs.TabPages.Add("Untitled (*)");
+
+            //Configure the tab (enable X button)
+            TabPage last = editorTabs.TabPages[editorTabs.TabPages.Count - 1];
 
             //Create the text editor control for this tab.
             Scintilla textEditor = new Scintilla();
