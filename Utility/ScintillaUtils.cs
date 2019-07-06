@@ -244,13 +244,16 @@ namespace Rhythm
         //Removes control codes from a given string.
         public static string RemoveControlCharacters(string inString)
         {
+            //Characters that are exempt from being pruned.
+            List<char> exemptChars = new List<char>() { '\n', '\r', '\t' };
+
             if (inString == null) return null;
             StringBuilder newString = new StringBuilder();
             char ch;
             for (int i = 0; i < inString.Length; i++)
             {
                 ch = inString[i];
-                if (!char.IsControl(ch))
+                if (!char.IsControl(ch) || exemptChars.Contains(ch))
                 {
                     newString.Append(ch);
                 }
