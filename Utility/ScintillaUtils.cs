@@ -34,7 +34,6 @@ namespace Rhythm
 
             //No wrap, and create some indent guides.
             TextArea.WrapMode = WrapMode.None;
-            TextArea.IndentationGuides = IndentView.LookBoth;
 
             //Colour configuration.
             TextArea.SetSelectionBackColor(true, IntToColor(0x114D9C));
@@ -48,19 +47,22 @@ namespace Rhythm
             TextArea.StyleClearAll();
 
             //Configure the line numbers on the left.
-            TextArea.Styles[Style.LineNumber].BackColor = IntToColor(backColour);
-            TextArea.Styles[Style.LineNumber].ForeColor = IntToColor(foreColour);
-            TextArea.Styles[Style.IndentGuide].ForeColor = IntToColor(foreColour);
-            TextArea.Styles[Style.IndentGuide].BackColor = IntToColor(backColour);
+            TextArea.Styles[Style.LineNumber].BackColor = IntToColor(0x3C3F41);
+            TextArea.Styles[Style.LineNumber].ForeColor = IntToColor(0x569CD6);
 
             var nums = TextArea.Margins[0];
-            nums.Width = 30;
+
+            //This adds some padding to the right of the numbers before the text begins.
+            TextArea.Margins[1].Width = 10;
+            TextArea.Margins[1].Type = MarginType.BackColor;
+            nums.Width = 45;
             nums.Type = MarginType.Number;
             nums.Sensitive = true;
             nums.Mask = 0;
 
             //Enable code folding.
-            EnableCodeFolding(TextArea);
+            //This isn't done for any languages at the moment.
+            //EnableCodeFolding(TextArea);
         }
 
         //Set the syntax highlighting for a given textarea, with a known extension.
@@ -184,13 +186,13 @@ namespace Rhythm
             TextArea.Styles[0].ForeColor = Color.White;
 
             //Keywords (let, for, while, etc).
-            TextArea.Styles[1].ForeColor = Color.Blue;
+            TextArea.Styles[1].ForeColor = IntToColor(0x569CD6);
 
             //Comments
-            TextArea.Styles[2].ForeColor = Color.Green;
+            TextArea.Styles[2].ForeColor = IntToColor(0x43A63A);
 
             //Strings
-            TextArea.Styles[3].ForeColor = Color.OrangeRed;
+            TextArea.Styles[3].ForeColor = IntToColor(0xD69D85);
 
             //Numbers
             TextArea.Styles[4].ForeColor = Color.LightSeaGreen;

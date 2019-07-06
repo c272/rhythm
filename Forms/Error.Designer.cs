@@ -1,4 +1,4 @@
-﻿namespace easyCase2
+﻿namespace Rhythm
 {
     partial class Error : DarkUI.Forms.DarkForm
     {

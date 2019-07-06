@@ -24,7 +24,7 @@ namespace Rhythm
             Scintilla textArea = (Scintilla)sender;
 
             //Get the positions to style from.
-            var startPos = textArea.GetEndStyled();
+            var startPos = 0;
             var endPos = e.Position;
             textArea.StartStyling(startPos);
 
@@ -58,6 +58,7 @@ namespace Rhythm
                         colourInt = COLOUR_STRINGS;
                         break;
                     case "NULL":
+                    case "BOOLEAN":
                     case "LET_SYM":
                     case "FOR_SYM":
                     case "FOREACH_SYM":
@@ -83,7 +84,7 @@ namespace Rhythm
                     case "DISREGARD_SYM":
                     case "EXTERNAL_SYM":
                         //Keywords.
-                        colourInt = COLOUR_KEYWORD;
+                         colourInt = COLOUR_KEYWORD;
                         break;
                     case "COMMENT":
                         //Comment.

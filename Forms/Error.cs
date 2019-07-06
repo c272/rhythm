@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using DarkUI;
 using DarkUI.Forms;
 
-namespace easyCase2
+namespace Rhythm
 {
     public partial class Error : DarkForm
     {
