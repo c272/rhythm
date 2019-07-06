@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,8 +21,7 @@ namespace Rhythm
             InitializeComponent();
 
             //Enable hotkeys.
-            //..
-             
+            ConfigureHotkeys();
         }
 
         //Execute things on load.
@@ -45,6 +45,11 @@ namespace Rhythm
             Scintilla textEditor = new Scintilla();
             textEditor.Name = "ScintillaTextArea";
             textEditor.TextChanged += tabTextChanged;
+
+            //Add input validation to the text area.
+            textEditor.InsertCheck += ScintillaUtils.ValidateInputCharacters;
+
+            //Add to the tab.
             editorTabs.TabPages[editorTabs.TabPages.Count - 1].Controls.Add(textEditor);
 
             //Configure the syntax colouring, etc. for this editor.
@@ -166,6 +171,10 @@ namespace Rhythm
                 newToolStripMenuItem_Click(this, null);
             }
 
+            //Get the text area to modify for highlighting and to add the text.
+            Scintilla textArea = GetTextAreaFromTab(editorTabs.TabPages.Count - 1);
+            textArea.Text = toLoad;
+
             //For that tab, set the file name and information.
             tab = editorTabs.TabPages[editorTabs.TabPages.Count - 1];
             tab.Text = fi.Name;
@@ -176,24 +185,137 @@ namespace Rhythm
             tab.Tag = tabInfo;
             editorTabs.TabPages[editorTabs.TabPages.Count - 1] = tab;
 
-            //Get the text area to modify for highlighting and to add the text.
-            Scintilla textArea = GetTextAreaFromTab(editorTabs.TabPages.Count - 1);
-            textArea.Text = toLoad;
-
             //Set the highlighting based on extension.
             ScintillaUtils.SetHighlighting(fi.Extension, textArea);
         }
 
         //When the "Save As" button is pressed in the "File" toolstrip.
-        private void saveAsFileButton_Click(object sender, EventArgs e)
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //Get the selected tab, clear the file path, then "save" as normal.
+            int tab = editorTabs.SelectedIndex;
 
+            //Check a tab is selected.
+            if (tab == -1) { return; }
+
+            //Get the editor info and clear the file.
+            EditorTabInfo info = (EditorTabInfo)editorTabs.TabPages[tab].Tag;
+            info.FileLocation = "";
+            editorTabs.TabPages[tab].Tag = info;
+
+            //Save normally.
+            saveToolStripMenuItem_Click(this, null);
         }
 
         //When the "Exit" button is pressed in the "File" toolstrip.
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Environment.Exit(0);
+        }
+
+        //When the "Undo" button is pressed in the "Edit" toolstrip.
+        private void undoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Get the selected tab's TextArea.
+            int tab = editorTabs.SelectedIndex;
+            if (tab == -1) return;
+            Scintilla textArea = GetTextAreaFromTab(tab);
+
+            //Undo.
+            textArea.Undo();
+        }
+
+        //When the "Redo" button is pressed in the "Edit" toolstrip.
+        private void redoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Get the selected tab's TextArea.
+            int tab = editorTabs.SelectedIndex;
+            if (tab == -1) return;
+            Scintilla textArea = GetTextAreaFromTab(tab);
+
+            //Redo.
+            textArea.Redo();
+        }
+
+        //When the "Cut" button is pressed in the "Edit" toolstrip.
+        private void cutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Get the selected tab's TextArea.
+            int tab = editorTabs.SelectedIndex;
+            if (tab == -1) return;
+            Scintilla textArea = GetTextAreaFromTab(tab);
+
+            //Cut.
+            textArea.Cut();
+        }
+
+        //When the "Copy" button is pressed in the "Edit" toolstrip.
+        private void copyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Get the selected tab's TextArea.
+            int tab = editorTabs.SelectedIndex;
+            if (tab == -1) return;
+            Scintilla textArea = GetTextAreaFromTab(tab);
+
+            //Copy.
+            textArea.Copy();
+        }
+
+        //When the "Paste" button is pressed in the "Edit" toolstrip.
+        private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Get the selected tab's TextArea.
+            int tab = editorTabs.SelectedIndex;
+            if (tab == -1) return;
+            Scintilla textArea = GetTextAreaFromTab(tab);
+
+            //Paste.
+            textArea.Paste();
+        }
+
+        //When the "Zoom In" button is pressed in the "View" toolstrip.
+        private void zoomInToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Get the selected tab's TextArea.
+            int tab = editorTabs.SelectedIndex;
+            if (tab == -1) return;
+            Scintilla textArea = GetTextAreaFromTab(tab);
+
+            //Zoom in.
+            textArea.ZoomIn();
+        }
+
+        //When the "Zoom Out" button is pressed in the "View" toolstrip.
+        private void zoomOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Get the selected tab's TextArea.
+            int tab = editorTabs.SelectedIndex;
+            if (tab == -1) return;
+            Scintilla textArea = GetTextAreaFromTab(tab);
+
+            //Zoom out.
+            textArea.ZoomOut();
+        }
+
+        //Configure hotkeys.
+        private void ConfigureHotkeys()
+        {
+            //Save
+            HotKeyManager.AddHotKey(this, saveWrapper, Keys.S, true);
+            //Open
+            HotKeyManager.AddHotKey(this, openWrapper, Keys.O, true);
+        }
+
+        //Void delegate wrapper for the open function.
+        private void openWrapper()
+        {
+            openToolStripMenuItem_Click(this, null);
+        }
+
+        //Void delegate wrapper for the save function.
+        private void saveWrapper()
+        {
+            saveToolStripMenuItem_Click(this, null);
         }
 
         //Returns the text area for the given tab.
@@ -223,6 +345,53 @@ namespace Rhythm
         {
             saveToolStripMenuItem_Click(sender, e);
         }
-        
+
+        //Mirrors the "Save As" button in the file tab.
+        private void saveAsFileButton_Click(object sender, EventArgs e)
+        {
+            saveAsToolStripMenuItem_Click(sender, e);
+        }
+
+        //Mirrors the "Undo" button in the edit tab.
+        private void undoButton_Click(object sender, EventArgs e)
+        {
+            undoToolStripMenuItem_Click(sender, e);
+        }
+
+        //Mirrors the "Redo" button in the edit tab.
+        private void redoButton_Click(object sender, EventArgs e)
+        {
+            redoToolStripMenuItem_Click(sender, e);
+        }
+
+        //Mirrors the "Cut" button in the edit tab.
+        private void cutButton_Click(object sender, EventArgs e)
+        {
+            cutToolStripMenuItem_Click(sender, e);
+        }
+
+        //Mirrors the "Copy" button in the edit tab.
+        private void copyButton_Click(object sender, EventArgs e)
+        {
+            copyToolStripMenuItem_Click(sender, e);
+        }
+
+        //Mirrors the "Paste" button in the edit tab.
+        private void pasteButton_Click(object sender, EventArgs e)
+        {
+            pasteToolStripMenuItem_Click(sender, e);
+        }
+
+        //Mirrors the "Zoom Out" button in the view tab.
+        private void zoomOutButton_Click(object sender, EventArgs e)
+        {
+            zoomOutToolStripMenuItem_Click(sender, e);
+        }
+
+        //Mirrors the "Zoom In" button in the view tab.
+        private void zoomInButton_Click(object sender, EventArgs e)
+        {
+            zoomInToolStripMenuItem_Click(sender, e);
+        }
     }
 }
