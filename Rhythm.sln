@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DarkUI", "DarkUI\DarkUI\Dar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualStudioTabControl", "VisualStudioTabControl\VisualStudioTabControl.csproj", "{EC777E43-5DDB-481C-9A70-07B4AB6AF769}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algo", "algo-lang\Algo\Algo.csproj", "{6B2A0F2A-4C2A-4B30-9908-95B8895D6055}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{EC777E43-5DDB-481C-9A70-07B4AB6AF769}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC777E43-5DDB-481C-9A70-07B4AB6AF769}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC777E43-5DDB-481C-9A70-07B4AB6AF769}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B2A0F2A-4C2A-4B30-9908-95B8895D6055}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B2A0F2A-4C2A-4B30-9908-95B8895D6055}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B2A0F2A-4C2A-4B30-9908-95B8895D6055}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B2A0F2A-4C2A-4B30-9908-95B8895D6055}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
