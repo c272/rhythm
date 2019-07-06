@@ -1,0 +1,6 @@
+[submodule "DarkUI"]
+	path = DarkUI
+	url = https://github.com/RobinPerris/DarkUI.git
+[submodule "algo-lang"]
+	path = algo-lang
+	url = https://github.com/c272/algo-lang.git
