@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using ScintillaNET;
+using System.Text;
 
 namespace Rhythm
 {
@@ -232,6 +233,29 @@ namespace Rhythm
 
             // Enable automatic folding
             TextArea.AutomaticFold = (AutomaticFold.Show | AutomaticFold.Click | AutomaticFold.Change);
+        }
+
+        //Validate the inserted characters for a given Scintilla TextArea control, before they're inserted.
+        public static void ValidateInputCharacters(object sender, InsertCheckEventArgs e)
+        {
+            e.Text = RemoveControlCharacters(e.Text);
+        }
+
+        //Removes control codes from a given string.
+        public static string RemoveControlCharacters(string inString)
+        {
+            if (inString == null) return null;
+            StringBuilder newString = new StringBuilder();
+            char ch;
+            for (int i = 0; i < inString.Length; i++)
+            {
+                ch = inString[i];
+                if (!char.IsControl(ch))
+                {
+                    newString.Append(ch);
+                }
+            }
+            return newString.ToString();
         }
     }
 }
