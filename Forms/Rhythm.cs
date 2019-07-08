@@ -337,6 +337,9 @@ namespace Rhythm
             string strCmdText;
             strCmdText = "/K algo " + fi.Name;
 
+            //Disable form.
+            this.Enabled = false;
+
             //Start console process.
             Process p = new Process();
             p.StartInfo.FileName = "cmd.exe";
@@ -344,6 +347,9 @@ namespace Rhythm
             p.StartInfo.Arguments = strCmdText;
             p.Start();
             p.WaitForExit();
+
+            //Re-enable form.
+            this.Enabled = true;
         }
 
         //Configure hotkeys.
