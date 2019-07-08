@@ -23,4 +23,4 @@ Here are some example screenshots of the program, for your viewing pleasure.
 
 ![screenshot_1](Screenshots/fizz_1.PNG)
 
-![screenshot_2](Screenshots/autosuggest.PNG)
+![screenshot_2](Screenshots/autosuggest.png)
