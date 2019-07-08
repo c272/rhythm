@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -297,6 +298,43 @@ namespace Rhythm
             textArea.ZoomOut();
         }
 
+        //When the "Run" button is pressed in the "Run" toolstrip.
+        private void runAlgoScriptToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Get the currently opened script's location.
+            int tab = editorTabs.SelectedIndex;
+            if (tab == -1) return;
+            EditorTabInfo info = (EditorTabInfo)editorTabs.TabPages[tab].Tag;
+
+            //Script open?
+            if (info.FileLocation == "")
+            {
+                Error err = new Error("No file is open to run.");
+                return;
+            }
+
+            //Yes, open a console and execute.
+            FileInfo fi = new FileInfo(info.FileLocation);
+
+            //Check it's an algo file (can be executed).
+            if (fi.Extension != ".ag")
+            {
+                Error err = new Error("You can only execute Algo scripts using Rhythm (your file must have the \".ag\" extension).");
+                return;
+            }
+
+            string strCmdText;
+            strCmdText = "/K algo " + fi.Name;
+
+            //Start console process.
+            Process p = new Process();
+            p.StartInfo.FileName = "cmd.exe";
+            p.StartInfo.WorkingDirectory = fi.DirectoryName;
+            p.StartInfo.Arguments = strCmdText;
+            p.Start();
+            p.WaitForExit();
+        }
+
         //Configure hotkeys.
         private void ConfigureHotkeys()
         {
@@ -392,6 +430,12 @@ namespace Rhythm
         private void zoomInButton_Click(object sender, EventArgs e)
         {
             zoomInToolStripMenuItem_Click(sender, e);
+        }
+
+        //Mirrors the "Run" button in the run tab.
+        private void startButton_Click(object sender, EventArgs e)
+        {
+            runAlgoScriptToolStripMenuItem_Click(sender, e);
         }
     }
 }
