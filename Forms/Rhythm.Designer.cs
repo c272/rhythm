@@ -91,6 +91,7 @@
             this.editorTabs.Size = new System.Drawing.Size(942, 445);
             this.editorTabs.TabIndex = 0;
             this.editorTabs.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.editorTabs.SelectedIndexChanged += new System.EventHandler(this.tabChanged);
             // 
             // menuStrip
             // 
@@ -239,7 +240,7 @@
             this.zoomInToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.zoomInToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("zoomInToolStripMenuItem.Image")));
             this.zoomInToolStripMenuItem.Name = "zoomInToolStripMenuItem";
-            this.zoomInToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.zoomInToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.zoomInToolStripMenuItem.Text = "Zoom In";
             this.zoomInToolStripMenuItem.Click += new System.EventHandler(this.zoomInToolStripMenuItem_Click);
             // 
@@ -248,7 +249,7 @@
             this.zoomOutToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.zoomOutToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("zoomOutToolStripMenuItem.Image")));
             this.zoomOutToolStripMenuItem.Name = "zoomOutToolStripMenuItem";
-            this.zoomOutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.zoomOutToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.zoomOutToolStripMenuItem.Text = "Zoom Out";
             this.zoomOutToolStripMenuItem.Click += new System.EventHandler(this.zoomOutToolStripMenuItem_Click);
             // 
@@ -266,7 +267,7 @@
             this.runAlgoScriptToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(220)))), ((int)(((byte)(220)))), ((int)(((byte)(220)))));
             this.runAlgoScriptToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("runAlgoScriptToolStripMenuItem.Image")));
             this.runAlgoScriptToolStripMenuItem.Name = "runAlgoScriptToolStripMenuItem";
-            this.runAlgoScriptToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.runAlgoScriptToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.runAlgoScriptToolStripMenuItem.Text = "Run Algo Script";
             this.runAlgoScriptToolStripMenuItem.Click += new System.EventHandler(this.runAlgoScriptToolStripMenuItem_Click);
             // 

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using ScintillaNET;
 using System.Text;
+using AutocompleteMenuNS;
 
 namespace Rhythm
 {
@@ -24,6 +25,77 @@ namespace Rhythm
         public static Color IntToColor(int rgb)
         {
             return Color.FromArgb(255, (byte)(rgb >> 16), (byte)(rgb >> 8), (byte)rgb);
+        }
+
+        //Configure the automatic autocomplete.
+        public static void ConfigureAutoComplete()
+        {
+            //Define the autocomplete keywords.
+            string[] snippets = new string[] 
+            {
+                //language keywords
+                "let",
+                "for",
+                "foreach",
+                "add",
+                "break",
+                "continue",
+                "at",
+                "remove",
+                "from",
+                "while",
+                "in",
+                "if",
+                "up",
+                "to",
+                "as",
+                "enum",
+                "library",
+                "sf",
+                "object",
+                "else",
+                "import",
+                "return",
+                "print",
+                "disregard",
+                "external",
+
+                //core standard library
+                "len",
+                "str",
+                "int",
+                "flt",
+                "bool",
+                "core.types",
+                "type",
+                "array.indexOf",
+                "array.contains",
+
+                //string standard library
+                "string.toChars",
+                "string.contains",
+                "string.split",
+                "string.replace",
+                "string.substring",
+                "string.endsWith",
+                "string.isInteger",
+                "string.isFloat",
+
+                //io standard library
+                "input.get",
+                "input.fromFile",
+                "output.toFile"
+            };
+
+            //Add all items in the string array.
+            var items = new List<AutocompleteItem>();
+            foreach (var item in snippets)
+            {
+                items.Add(new SnippetAutocompleteItem(item) { ImageIndex = 1 });
+            }
+
+            //Set autocomplete source.
+            Rhythm.autoComplete.SetAutocompleteItems(items);
         }
 
         //Configure the syntax highlighting for a specific editor.

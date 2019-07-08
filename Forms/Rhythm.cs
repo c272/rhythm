@@ -12,17 +12,25 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DarkUI.Forms;
 using ScintillaNET;
+using AutocompleteMenuNS;
 
 namespace Rhythm
 {
     public partial class Rhythm : DarkForm
     {
+
+        //The AutoComplete window.
+        public static AutocompleteMenu autoComplete = new AutocompleteMenu();
+
         public Rhythm()
         {
             InitializeComponent();
 
             //Enable hotkeys.
             ConfigureHotkeys();
+
+            //Configure the AutoComplete.
+            ScintillaUtils.ConfigureAutoComplete();
         }
 
         //Execute things on load.
@@ -188,6 +196,9 @@ namespace Rhythm
 
             //Set the highlighting based on extension.
             ScintillaUtils.SetHighlighting(fi.Extension, textArea);
+
+            //Set autocomplete based on extension.
+            tabChanged(this, null);
         }
 
         //When the "Save As" button is pressed in the "File" toolstrip.
@@ -436,6 +447,24 @@ namespace Rhythm
         private void startButton_Click(object sender, EventArgs e)
         {
             runAlgoScriptToolStripMenuItem_Click(sender, e);
+        }
+
+        //When the selected tab is changed in the editor.
+        private void tabChanged(object sender, EventArgs e)
+        {
+            //Get the index of the tab, check a tab is selected.
+            int tab = editorTabs.SelectedIndex;
+            if (tab == -1) { return; }
+
+            //Get the tab info.
+            EditorTabInfo info = (EditorTabInfo)editorTabs.TabPages[tab].Tag;
+            if (!info.FileName.EndsWith(".ag")) { return; }
+
+            //Get tab TextArea.
+            Scintilla textArea = GetTextAreaFromTab(tab);
+
+            //Bind the AutoComplete window to this tab.
+            autoComplete.TargetControlWrapper = new ScintillaWrapper(textArea);
         }
     }
 }
