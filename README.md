@@ -17,3 +17,7 @@ Building in "Debug" mode is recommended for all contributions to the update bran
 Simply launch `rhythm.exe` and the editor GUI will pop up. It works in the same way as nearly every other text editor available. If you want to run an Algo script, make sure it's been saved/loaded first, then click the "Start" button in the toolbar or on the button strip at the top of the window.
 
 If you're looking for information on how to program in Algo, you can view the Algo wiki [here.](https://github.com/c272/algo-lang/wiki)
+
+## Screenshots
+Here are some example screenshots of the program, for your viewing pleasure.
+![screenshot_1](Screenshots/fizz_1.png)
