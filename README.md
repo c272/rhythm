@@ -22,3 +22,5 @@ If you're looking for information on how to program in Algo, you can view the Al
 Here are some example screenshots of the program, for your viewing pleasure.
 
 ![screenshot_1](Screenshots/fizz_1.PNG)
+
+![screenshot_2](Screenshots/autosuggest.PNG)
