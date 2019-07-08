@@ -83,6 +83,7 @@ namespace Rhythm
                     case "PRINT_SYM":
                     case "DISREGARD_SYM":
                     case "EXTERNAL_SYM":
+                    case "CONTINUE_SYM":
                         //Keywords.
                          colourInt = COLOUR_KEYWORD;
                         break;
